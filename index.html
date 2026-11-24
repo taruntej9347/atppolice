@@ -42,7 +42,7 @@ h1{font-weight:800;font-size:clamp(30px,4.4vw,46px);line-height:1.05;letter-spac
 .batches button i{width:12px;height:12px;border-radius:3px;background:var(--c)}
 .batches button[aria-pressed=true]{border-color:var(--red);background:var(--hi)}
 .batches button small{color:var(--mut);font-size:13px}
-.filters{display:grid;grid-template-columns:minmax(0,2fr) repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}
+.filters{display:grid;grid-template-columns:minmax(0,2fr) repeat(5,minmax(0,1fr));gap:10px;margin-top:16px}
 label.f{display:flex;flex-direction:column;font-size:13px;color:var(--mut);gap:4px}
 input,select{font:16px Archivo,sans-serif;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:9px 10px;min-height:44px;width:100%}
 input:focus,select:focus,button:focus-visible{outline:2px solid var(--red);outline-offset:1px}
@@ -84,6 +84,25 @@ dialog::backdrop{background:#0007}
 .nb li.me{color:var(--red);font-weight:700}
 .dx{display:flex;justify-content:flex-end;gap:8px;padding:0 20px 18px}
 .note{font-size:13px;color:var(--mut);margin-top:14px;max-width:80ch}
+.fc{margin-bottom:16px}
+.fcg{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
+.nx{display:grid;grid-template-columns:repeat(auto-fit,minmax(14em,1fr));gap:12px}
+.nx div{border-top:2px solid var(--ink);padding-top:8px}
+.nx b{display:block;font-size:clamp(22px,2.6vw,28px);font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.nx span{font-size:14px;color:var(--mut)}
+.ctl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.yb{font-size:13px}
+.yb .lg{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:6px;color:var(--mut)}
+.yb .lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;background:var(--c)}
+.yr{display:grid;grid-template-columns:3em minmax(0,1fr);gap:8px;align-items:center;padding:2px 0}
+.yr span{font-variant-numeric:tabular-nums;color:var(--mut)}
+.br{display:flex;flex-direction:column;gap:2px}
+.br div{height:9px;border-radius:2px;background:var(--c);min-width:2px;position:relative}
+.br em{position:absolute;left:calc(100% + 6px);top:-4px;font-style:normal;font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cr{list-style:none;margin:0;padding:0}
+.cr li{display:grid;grid-template-columns:7em minmax(0,1fr);gap:10px;padding:5px 0;border-top:1px solid var(--line);font-size:14px}
+.cr li b{font-variant-numeric:tabular-nums}
+.cr li.p b{color:var(--red)}
 .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
 .tabs a{display:flex;align-items:baseline;gap:8px;text-decoration:none;color:var(--ink);border:2px solid var(--ink);border-radius:8px;padding:8px 14px;font-weight:600;min-height:44px}
 .tabs a small{font-weight:400;color:var(--mut);font-variant-numeric:tabular-nums}
@@ -91,7 +110,7 @@ dialog::backdrop{background:#0007}
 .tabs a[aria-current=true] small{color:inherit;opacity:.75}
 .rkb{display:inline-block;font-weight:700;font-size:12.5px;border-radius:4px;padding:1px 6px;color:#fff;background:var(--rc)}
 .flag{color:var(--red);font-size:13px}
-@media(max-width:900px){.top{grid-template-columns:1fr}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.filters .q{grid-column:1/-1}}
+@media(max-width:900px){.top{grid-template-columns:1fr}.fcg{grid-template-columns:1fr}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.filters .q{grid-column:1/-1}}
 @media(max-width:600px){#ladder{grid-template-columns:repeat(auto-fill,minmax(8px,1fr));gap:1.5px}.tw{max-height:none;border:0}table,thead,tbody,tr,td{display:block}thead{display:none}tbody tr{border:1px solid var(--line);border-radius:10px;margin-bottom:8px;padding:8px 12px;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:12px}td{border:0;padding:2px 0}td.rk{grid-row:span 5}td.n,td.d{text-align:left}td[data-l]:not(.rk):not(.nmc)::before{content:attr(data-l) ": ";color:var(--mut);font-size:13px}.count{margin-left:0;width:100%}}
 @media(prefers-reduced-motion:no-preference){#ladder i{transition:opacity .25s}}
 </style>
@@ -110,6 +129,19 @@ dialog::backdrop{background:#0007}
 </header>
 <main class="band" style="padding-top:0">
  <div class="wrap">
+  <section class="panel fc">
+   <div class="ladhd"><h2>Promotion forecast</h2><p>PC → HC → ASI. When an ASI retires, the senior-most serving HC is promoted; that HC post goes to the senior-most serving PC.</p></div>
+   <div class="fcg">
+    <div>
+     <div class="nx" id="nx"></div>
+     <div class="ctl">
+      <label class="f">Extra ASI vacancies a year (promotions to SI, VRS, deaths)<input id="xa" type="number" min="0" max="60" step="1" value="0" inputmode="numeric"></label>
+      <label class="f">Extra HC vacancies a year (VRS, deaths, other exits)<input id="xh" type="number" min="0" max="60" step="1" value="0" inputmode="numeric"></label>
+     </div>
+    </div>
+    <div class="yb"><div class="lg"><span><i style="--c:var(--red)"></i>HC → ASI</span><span><i style="--c:var(--navy)"></i>PC → HC</span><span>promotions per year</span></div><div id="ybars"></div></div>
+   </div>
+  </section>
   <section class="panel">
    <div class="ladhd"><h2>Seniority ladder</h2><p id="ladp">Each square is one person, most senior first, coloured by date of joining as HC. Tap a square for details.</p></div>
    <div id="ladder" role="list"></div>
@@ -121,6 +153,7 @@ dialog::backdrop{background:#0007}
     <label class="f">Police station / unit<select id="ps"></select></label>
     <label class="f">Category<select id="cat"></select></label>
     <label class="f">Gender<select id="gen"><option value="">All</option><option value="M">Male</option><option value="F">Female</option></select></label>
+    <label class="f">Next promotion<select id="pr"><option value="">Any</option><option value="1">Within 1 year</option><option value="3">Within 3 years</option><option value="5">Within 5 years</option><option value="10">Within 10 years</option><option value="none">Retires before it</option></select></label>
     <label class="f">Retirement (at 62)<select id="ret"><option value="">Any</option><option value="2">Within 2 years</option><option value="5">Within 5 years</option><option value="10">Within 10 years</option><option value="-10">More than 10 years</option></select></label>
    </div>
    <div class="row2">
@@ -133,14 +166,15 @@ dialog::backdrop{background:#0007}
   </section>
   <div class="tw scroll" style="margin-top:12px">
    <table>
-    <thead><tr><th data-s="rk" id="thrk">Rank</th><th data-s="sen" class="asc">Seniority</th><th data-s="name">Name</th><th data-s="gno">G.No</th><th data-s="ps">Station / unit</th><th data-s="cat">Category</th><th data-s="dob">Born</th><th data-s="doj">Joined in rank</th><th data-s="ret">Retires</th></tr></thead>
+    <thead><tr><th data-s="rk" id="thrk">Rank</th><th data-s="sen" class="asc">Seniority</th><th data-s="name">Name</th><th data-s="gno">G.No</th><th data-s="ps">Station / unit</th><th data-s="cat">Category</th><th data-s="dob">Born</th><th data-s="doj">Joined in rank</th><th data-s="ret">Retires</th><th data-s="phc" id="thhc">Expected HC</th><th data-s="pasi" id="thasi">Expected ASI</th></tr></thead>
     <tbody id="tb"></tbody>
    </table>
    <div class="empty" id="empty" hidden>No one matches these filters.</div>
    <div class="more" id="morewrap" hidden><button class="btn" id="more" type="button">Show more</button></div>
   </div>
   <div class="note"><p>Sources, all final lists dated 18.11.2026: ASIs C.No.294/A1/2026 (12 pages, 225 names); HCs C.No.293/A1/2026 (36 pages, 586 names); PCs C.No.292/A1/2026 (96 pages, 1,414 names). Mobile numbers are left out of this page.</p>
-<p>Station names are written differently across the three lists (for example "ATP I TOWN", "ATP 1 Town PS"); they are grouped under one name here, and the name exactly as printed is shown in each person's details. In the HC list, seniority no. 228 is missing, so serial and seniority numbers differ by one from Sl. 228 on. A few entries are printed as in the source even where they look like typing errors (a joining date of 19-01-1900, a blank date of birth, a category written as "0" or "Nil"); these are flagged in the person's details. Retirement is worked out as the end of the month the person turns 62, for reference only.</p></div>
+<p>Station names are written differently across the three lists (for example "ATP I TOWN", "ATP 1 Town PS"); they are grouped under one name here, and the name exactly as printed is shown in each person's details. In the HC list, seniority no. 228 is missing, so serial and seniority numbers differ by one from Sl. 228 on. A few entries are printed as in the source even where they look like typing errors (a joining date of 19-01-1900, a blank date of birth, a category written as "0" or "Nil"); these are flagged in the person's details. Retirement is worked out as the end of the month the person turns 62, for reference only.</p>
+<p>The promotion forecast is an estimate, not an order. It assumes every post is filled the day after the vacancy, strictly by this seniority, with no other promotion rules, reservations, departmental tests, deputations or new posts. It also treats the erstwhile district as one cadre, though these lists are for allotment to the new local cadres. With no extra vacancies added, it counts only retirements, so real promotions will usually come sooner than shown.</p></div>
  </div>
 </main>
 <dialog id="dlg"><div id="dbody"></div><div class="dx"><button class="btn ghost" id="dcopy" type="button">Copy details</button><button class="btn" id="dclose" type="button">Close</button></div></dialog>
@@ -2382,9 +2416,43 @@ const RANKS={ASI:{name:'Assistant Sub-Inspectors',short:'ASI',proc:'C.No.294/A1/
 const ORDER={ASI:0,HC:1,PC:2};
 const views=['asi','hc','pc','all'];
 let E=[],years={};
-const st={view:'asi',q:'',ps:'',cat:'',gen:'',ret:'',ill:false,mc:false,wd:false,yrs:new Set(),sort:'sen',dir:1,shown:100};
+const st={view:'asi',q:'',ps:'',cat:'',gen:'',ret:'',pr:'',xa:0,xh:0,ill:false,mc:false,wd:false,yrs:new Set(),sort:'sen',dir:1,shown:100};
 const isDark=()=>{const t=document.documentElement.dataset.theme;return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches};
 const C=(rank,y)=>{const ys=years[rank]||[];if(!y)return 'var(--line)';const t=ys.length>1?ys.indexOf(y)/(ys.length-1):0;return isDark()?`color-mix(in oklab,#cfe0ff ${Math.round(100-t*70)}%,#33507f)`:`color-mix(in oklab,#14213d ${Math.round(100-t*78)}%,#7fb0d8)`};
+const TD='2026-11-24';
+const nextDay=iso=>{const d=new Date(iso+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+1);return d.toISOString().slice(0,10)};
+const addDays=(iso,n)=>{const d=new Date(iso+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+Math.round(n));return d.toISOString().slice(0,10)};
+let SIM={};
+const sim=()=>{
+ E.forEach(e=>{e.phc=null;e.pasi=null;e.cur=e.rank;e.gone=false;e.qhc=null;e.qasi=null});
+ const hcQ=E.filter(e=>e.rank==='HC'),pcQ=E.filter(e=>e.rank==='PC');let hi=0,pi=0;
+ const ev=[];E.forEach(e=>{if(e.ret)ev.push([e.ret,0,e])});
+ const end='2063-12-31';
+ [[st.xa,1],[st.xh,2]].forEach(([r,k])=>{if(r>0){const step=365.25/r;for(let d=addDays(TD,step);d<end;d=addDays(d,step))ev.push([d,k,null])}});
+ ev.sort((a,b)=>a[0]<b[0]?-1:a[0]>b[0]?1:a[1]-b[1]);
+ const log=[];
+ const fillHC=d=>{while(pi<pcQ.length&&pcQ[pi].gone)pi++;if(pi<pcQ.length){const p=pcQ[pi++];p.cur='HC';p.phc=d;hcQ.push(p);log.push(['PC',d,p])}};
+ const fillASI=d=>{while(hi<hcQ.length&&(hcQ[hi].gone||hcQ[hi].cur!=='HC'))hi++;if(hi<hcQ.length){const p=hcQ[hi++];p.cur='ASI';p.pasi=d;log.push(['HC',d,p]);fillHC(d)}};
+ for(const [d,k,e] of ev){
+  if(k===1){fillASI(d);continue}if(k===2){fillHC(d);continue}
+  e.gone=true;if(d<TD)continue;const nd=nextDay(d);
+  if(e.cur==='ASI')fillASI(nd);else if(e.cur==='HC')fillHC(nd);
+ }
+ E.forEach(e=>{e.nextP=e.rank==='PC'?e.phc:e.rank==='HC'?e.pasi:null;e.endRank=e.pasi?'ASI':e.phc?'HC':e.rank});
+ const yrs={};log.forEach(([k,d])=>{const y=+d.slice(0,4);(yrs[y]??={HC:0,PC:0})[k]++});
+ SIM={log,yrs};
+};
+const fy=iso=>iso?((new Date(iso)-new Date(TD))/31557600000):null;
+const paint=()=>{
+ const {log,yrs}=SIM;
+ const nA=log.find(l=>l[0]==='HC'),nH=log.find(l=>l[0]==='PC');
+ const lim=addDays(TD,365.25);const c12=k=>log.filter(l=>l[0]===k&&l[1]<=lim).length;
+ const lim5=addDays(TD,365.25*5);const c5=k=>log.filter(l=>l[0]===k&&l[1]<=lim5).length;
+ $('nx').innerHTML=[[nA?fmt(nA[1]):'—',nA?`next HC → ASI: ${nA[2].name} (HC #${nA[2].sen})`:'no ASI vacancy forecast'],[nH?fmt(nH[1]):'—',nH?`next PC → HC: ${nH[2].name} (PC #${nH[2].sen})`:'no HC vacancy forecast'],[`${c12('HC')} · ${c12('PC')}`,'HC → ASI · PC → HC in the next 12 months'],[`${c5('HC')} · ${c5('PC')}`,'HC → ASI · PC → HC in the next 5 years']].map(([a,b])=>`<div><b>${esc(a)}</b><span>${esc(b)}</span></div>`).join('');
+ const Y=[];for(let y=2026;y<=2036;y++)Y.push(y);
+ const mx=Math.max(1,...Y.map(y=>Math.max(yrs[y]?.HC||0,yrs[y]?.PC||0)));
+ $('ybars').innerHTML=Y.map(y=>{const a=yrs[y]?.HC||0,b=yrs[y]?.PC||0;return `<div class="yr"><span>${y}</span><div class="br"><div style="--c:var(--red);width:${a/mx*85}%"><em>${a}</em></div><div style="--c:var(--navy);width:${b/mx*85}%"><em>${b}</em></div></div></div>`}).join('')+'<p style="margin:6px 0 0;color:var(--mut)">2026 covers 25 Nov to 31 Dec only.</p>';
+};
 const pool=()=>st.view==='all'?E:E.filter(e=>e.rank===st.view.toUpperCase());
 
 const lad=$('ladder'),tb=$('tb');
@@ -2417,18 +2485,20 @@ const match=e=>{
  if(st.cat&&e.cat!==st.cat)return false;
  if(st.gen&&e.g!==st.gen)return false;
  if(st.ret){const v=+st.ret;if(e.yrsLeft==null)return false;if(v>0&&!(e.yrsLeft<=v))return false;if(v<0&&!(e.yrsLeft>-v))return false}
+ if(st.pr){if(e.rank==='ASI')return false;if(st.pr==='none'){if(e.nextP)return false}else{if(!e.nextP||fy(e.nextP)>+st.pr)return false}}
  if(st.ill&&!e.ill)return false;if(st.mc&&!e.mc)return false;if(st.wd&&!e.wd)return false;
  if(st.yrs.size&&!st.yrs.has(e.yr))return false;
  return true};
 const cmp=(a,b)=>{const k=st.sort;let x=a[k],y=b[k];if(k==='gno'){x=+x;y=+y}if(k==='rk'){x=ORDER[a.rank];y=ORDER[b.rank]}if(k==='sen'&&st.view==='all'&&a.rank!==b.rank){return (ORDER[a.rank]-ORDER[b.rank])*st.dir}if(x==null&&y!=null)return 1;if(y==null&&x!=null)return -1;return (x<y?-1:x>y?1:(ORDER[a.rank]-ORDER[b.rank])||a.sen-b.sen)*st.dir};
 const render=()=>{
- const P=pool(),list=P.filter(match).sort(cmp),all=st.view==='all';
+ const P=pool(),list=P.filter(match).sort(cmp),all=st.view==='all',showHC=all||st.view==='pc',showASI=st.view!=='asi';
+ $('thhc').hidden=!showHC;$('thasi').hidden=!showASI;
  const sel=new Set(list.map(e=>e.id));
  for(const c of lad.children)c.classList.toggle('off',!sel.has(+c.dataset.k));
  document.querySelectorAll('#batches button').forEach(b=>b.setAttribute('aria-pressed',st.yrs.has(+b.dataset.y)));
- const any=st.q||st.ps||st.cat||st.gen||st.ret||st.ill||st.mc||st.wd||st.yrs.size;
+ const any=st.q||st.ps||st.cat||st.gen||st.ret||st.pr||st.ill||st.mc||st.wd||st.yrs.size;
  $('count').textContent=any?`${list.length.toLocaleString('en-IN')} of ${P.length.toLocaleString('en-IN')} match`:`All ${P.length.toLocaleString('en-IN')}`;
- tb.innerHTML=list.slice(0,st.shown).map(e=>`<tr data-k="${e.id}">${all?`<td data-l="Rank"><span class="rkb" style="--rc:${RANKS[e.rank].c}">${e.rank}</span></td>`:''}<td class="n rk" data-l="Seniority"><span class="rank">${e.sen}</span></td><td class="nmc" data-l="Name"><span class="nm">${esc(e.name)}</span>${e.g==='F'?' <span class="tag">F</span>':''}${e.ill?' <span class="tag r">Illness</span>':''}${e.mc?' <span class="tag r">Child care</span>':''}${e.wd?' <span class="tag r">Widow</span>':''}${e.note?' <span class="flag" title="'+esc(e.note)+'">●</span>':''}</td><td class="n" data-l="G.No">${esc(e.gno)}</td><td data-l="Station">${esc(e.ps)}</td><td data-l="Category">${esc(e.cat)}</td><td class="d" data-l="Born">${fmt(e.dob)}</td><td class="d" data-l="Joined">${fmt(e.doj)}</td><td class="d" data-l="Retires">${fmt(e.ret)}</td></tr>`).join('');
+ tb.innerHTML=list.slice(0,st.shown).map(e=>`<tr data-k="${e.id}">${all?`<td data-l="Rank"><span class="rkb" style="--rc:${RANKS[e.rank].c}">${e.rank}</span></td>`:''}<td class="n rk" data-l="Seniority"><span class="rank">${e.sen}</span></td><td class="nmc" data-l="Name"><span class="nm">${esc(e.name)}</span>${e.g==='F'?' <span class="tag">F</span>':''}${e.ill?' <span class="tag r">Illness</span>':''}${e.mc?' <span class="tag r">Child care</span>':''}${e.wd?' <span class="tag r">Widow</span>':''}${e.note?' <span class="flag" title="'+esc(e.note)+'">●</span>':''}</td><td class="n" data-l="G.No">${esc(e.gno)}</td><td data-l="Station">${esc(e.ps)}</td><td data-l="Category">${esc(e.cat)}</td><td class="d" data-l="Born">${fmt(e.dob)}</td><td class="d" data-l="Joined">${fmt(e.doj)}</td><td class="d" data-l="Retires">${fmt(e.ret)}</td>${showHC?`<td class="d" data-l="Expected HC">${e.rank==='PC'?(e.phc?fmt(e.phc):'<span class="flag">retires as PC</span>'):''}</td>`:''}${showASI?`<td class="d" data-l="Expected ASI">${e.rank==='ASI'?'':(e.pasi?fmt(e.pasi):`<span class="flag">retires as ${e.endRank}</span>`)}</td>`:''}</tr>`).join('');
  $('empty').hidden=list.length>0;
  $('morewrap').hidden=list.length<=st.shown;
  $('more').textContent=`Show ${Math.min(200,list.length-st.shown)} more (${list.length-st.shown} left)`;
@@ -2436,13 +2506,14 @@ const render=()=>{
  document.querySelector(`th[data-s="${st.sort}"]`)?.classList.add(st.dir>0?'asc':'desc');
  try{localStorage.setItem('psr',JSON.stringify({...st,yrs:[...st.yrs],view:undefined}))}catch(_){}
 };
-const sync=()=>{$('q').value=st.q;$('ps').value=st.ps;$('cat').value=st.cat;$('gen').value=st.gen;$('ret').value=st.ret;$('ill').checked=st.ill;$('mc').checked=st.mc;$('wd').checked=st.wd};
-const route=()=>{const h=location.hash.slice(1);st.view=views.includes(h)?h:'asi';if(st.view!=='all'&&st.sort==='rk')st.sort='sen';st.shown=100;fill();render()};
+const sync=()=>{$('q').value=st.q;$('ps').value=st.ps;$('cat').value=st.cat;$('gen').value=st.gen;$('ret').value=st.ret;$('pr').value=st.pr;$('xa').value=st.xa;$('xh').value=st.xh;$('ill').checked=st.ill;$('mc').checked=st.mc;$('wd').checked=st.wd};
+const route=()=>{const h=location.hash.slice(1);st.view=views.includes(h)?h:'asi';if(st.view!=='all'&&st.sort==='rk')st.sort='sen';if(st.view==='asi'&&(st.sort==='phc'||st.sort==='pasi'))st.sort='sen';if(st.view==='hc'&&st.sort==='phc')st.sort='sen';st.shown=100;fill();render()};
 
 const bind=(id,key,ev='change',val=el=>el.value)=>$(id).addEventListener(ev,e=>{st[key]=val(e.target);st.shown=100;render()});
-bind('q','q','input');bind('ps','ps');bind('cat','cat');bind('gen','gen');bind('ret','ret');
+bind('q','q','input');bind('ps','ps');bind('cat','cat');bind('gen','gen');bind('ret','ret');bind('pr','pr');
+['xa','xh'].forEach(id=>$(id).addEventListener('change',e=>{st[id]=Math.max(0,Math.min(60,Math.round(+e.target.value||0)));e.target.value=st[id];sim();paint();render()}));
 bind('ill','ill','change',el=>el.checked);bind('mc','mc','change',el=>el.checked);bind('wd','wd','change',el=>el.checked);
-$('reset').addEventListener('click',()=>{Object.assign(st,{q:'',ps:'',cat:'',gen:'',ret:'',ill:false,mc:false,wd:false,yrs:new Set(),shown:100});sync();render()});
+$('reset').addEventListener('click',()=>{Object.assign(st,{q:'',ps:'',cat:'',gen:'',ret:'',pr:'',ill:false,mc:false,wd:false,yrs:new Set(),shown:100});sync();render()});
 $('more').addEventListener('click',()=>{st.shown+=200;render()});
 $('batches').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const y=+b.dataset.y;st.yrs.has(y)?st.yrs.delete(y):st.yrs.add(y);st.shown=100;render()});
 document.querySelector('thead').addEventListener('click',e=>{const th=e.target.closest('th[data-s]');if(!th)return;const k=th.dataset.s;st.dir=st.sort===k?-st.dir:1;st.sort=k;render()});
@@ -2451,6 +2522,16 @@ const repaint=()=>{if(E.length){fill();render()}};
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',repaint);
 const mo=new MutationObserver(repaint);mo.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 
+const career=e=>{
+ const L=[];const yl=d=>{const v=fy(d);return v>=0?` <span style="color:var(--mut)">in about ${v.toFixed(1)} years</span>`:''};
+ if(e.rank==='PC')L.push(['',`${e.doj?fmt(e.doj):'—'}`,'Joined as PC']);
+ if(e.rank==='HC')L.push(['',fmt(e.doj),'Promoted HC']);
+ if(e.rank==='ASI')L.push(['',fmt(e.doj),'Promoted ASI']);
+ if(e.rank==='PC')L.push(e.phc?['p',fmt(e.phc),`Expected HC${yl(e.phc)}`]:['','—','Not expected to reach HC before retirement']);
+ if(e.rank!=='ASI'&&(e.rank==='HC'||e.phc))L.push(e.pasi?['p',fmt(e.pasi),`Expected ASI${yl(e.pasi)}`]:['','—','Not expected to reach ASI before retirement']);
+ L.push(['',fmt(e.ret),`Retires as ${e.endRank}`]);
+ return L.map(([c,d,t])=>`<li class="${c}"><b>${d}</b><span>${t}</span></li>`).join('');
+};
 const dlg=$('dlg');let cur=null;
 const open=e=>{cur=e;
  const same=E.filter(x=>x.rank===e.rank),i=same.findIndex(x=>x.id===e.id),nb=same.slice(Math.max(0,i-3),i+4);
@@ -2459,6 +2540,7 @@ const open=e=>{cur=e;
  const R=RANKS[e.rank];
  $('dbody').innerHTML=`<div class="dh"><span class="rkb" style="--rc:${R.c};border:1px solid #fff6">${e.rank}</span> <b>#${e.sen}</b><h3>${esc(e.name)}</h3></div>
  <dl class="dl"><dt>List</dt><dd>${R.name} (Civil), ${R.proc}</dd><dt>Sl. No. in list</dt><dd>${e.sl} (page ${e.page})</dd><dt>G.No</dt><dd>${esc(e.gno)}</dd><dt>CFMS ID</dt><dd>${esc(e.cfms)}</dd><dt>Gender</dt><dd>${e.g==='F'?'Female':'Male'}</dd><dt>Category</dt><dd>${esc(e.cat)}</dd><dt>Station / unit</dt><dd>${esc(e.ps)}${e.psRaw!==e.ps?` <span style="color:var(--mut)">(printed: ${esc(e.psRaw)})</span>`:''}<br>${psRank} of ${samePs.length} ${e.rank}s here by seniority · all ranks here: ${atPs}</dd><dt>Date of birth</dt><dd>${fmt(e.dob)}</dd><dt>Joined in this rank</dt><dd>${fmt(e.doj)}${e.doj?` (${same.filter(x=>x.doj===e.doj).length} share this date)`:''}</dd><dt>Retires (at 62)</dt><dd>${fmt(e.ret)}${e.yrsLeft!=null&&e.yrsLeft>=0?` · about ${e.yrsLeft.toFixed(1)} years left`:''}</dd><dt>Seniors ahead</dt><dd>${i} ${e.rank}s</dd><dt>Special columns</dt><dd>Serious illness: ${e.ill?'yes':'nil'} · Mentally challenged children: ${e.mc?'yes':'nil'} · Widow: ${e.wd?'yes':'nil'}</dd>${e.note?`<dt>Note</dt><dd class="flag">${esc(e.note)}</dd>`:''}</dl>
+ <div class="nb"><h4>Career forecast</h4><ol class="cr">${career(e)}</ol></div>
  <div class="nb"><h4>Neighbours on the ${e.rank} list</h4><ol>${nb.map(x=>`<li class="${x.id===e.id?'me':''}"><b>${x.sen}</b><span>${esc(x.name)} · ${esc(x.ps)}</span></li>`).join('')}</ol></div>`;
  lad.querySelectorAll('i.sel').forEach(c=>c.classList.remove('sel'));lad.querySelector(`i[data-k="${e.id}"]`)?.classList.add('sel');
  dlg.showModal()};
@@ -2467,15 +2549,15 @@ tb.addEventListener('click',ev=>{const tr=ev.target.closest('tr');if(tr)open(byI
 lad.addEventListener('click',ev=>{const c=ev.target.closest('i');if(c)open(byId(c.dataset.k))});
 $('dclose').addEventListener('click',()=>dlg.close());
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
-$('dcopy').addEventListener('click',async()=>{if(!cur)return;const e=cur;const t=`${e.rank} seniority ${e.sen} | ${e.name} | G.No ${e.gno} | CFMS ${e.cfms} | ${e.cat} | ${e.ps} | DOB ${fmt(e.dob)} | Joined ${fmt(e.doj)} | Retires ${fmt(e.ret)}`;try{await navigator.clipboard.writeText(t);$('dcopy').textContent='Copied'}catch(_){$('dcopy').textContent='Copy blocked'}setTimeout(()=>$('dcopy').textContent='Copy details',1500)});
+$('dcopy').addEventListener('click',async()=>{if(!cur)return;const e=cur;const t=`${e.rank} seniority ${e.sen} | ${e.name} | G.No ${e.gno} | CFMS ${e.cfms} | ${e.cat} | ${e.ps} | DOB ${fmt(e.dob)} | Joined ${fmt(e.doj)}${e.rank==='PC'?' | Expected HC '+fmt(e.phc):''}${e.rank!=='ASI'?' | Expected ASI '+fmt(e.pasi):''} | Retires ${fmt(e.ret)} as ${e.endRank}`;try{await navigator.clipboard.writeText(t);$('dcopy').textContent='Copied'}catch(_){$('dcopy').textContent='Copy blocked'}setTimeout(()=>$('dcopy').textContent='Copy details',1500)});
 
-try{const s=JSON.parse(localStorage.getItem('psr')||'null');if(s){Object.assign(st,s,{yrs:new Set(s.yrs||[]),shown:100,view:'asi'})}}catch(_){}
+try{const s=JSON.parse(localStorage.getItem('psr')||'null');if(s){Object.assign(st,s,{yrs:new Set(s.yrs||[]),shown:100,view:'asi'});st.xa=+st.xa||0;st.xh=+st.xh||0}}catch(_){}
 $('count').textContent='Loading the lists…';
 Promise.resolve(window.__DATA__).then(rows=>{
  E=rows.map((r,i)=>({id:i,rank:r[0],sl:r[1],sen:r[2],gno:r[3],name:r[4],g:r[5],cfms:r[6],dob:r[7],doj:r[8],cat:r[9],ps:r[10],psRaw:r[11],ill:r[12],mc:r[13],wd:r[14],page:r[15],note:r[16]}));
  E.forEach(e=>{e.ret=retOf(e.dob);e.yr=e.doj?+e.doj.slice(0,4):null;e.yrsLeft=e.ret?(new Date(e.ret)-today)/31557600000:null;e.rk=ORDER[e.rank];e.key=(e.name+' '+e.gno+' '+e.cfms+' '+e.sen+' '+e.rank).toLowerCase()});
  for(const r of Object.keys(RANKS))years[r]=[...new Set(E.filter(e=>e.rank===r&&e.yr).map(e=>e.yr))].sort((a,b)=>a-b);
- route();
+ sim();paint();route();
 }).catch(()=>{$('count').textContent='The lists could not be loaded. Reload the page to try again.'});
 }
 </script>
